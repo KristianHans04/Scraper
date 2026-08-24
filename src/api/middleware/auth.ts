@@ -306,7 +306,7 @@ export function requireFeature(feature: keyof Organization['features']) {
     }
 
     // Type assertion for feature access
-    const features = request.organization.features as Record<string, boolean>;
+    const features = request.organization.features as unknown as Record<string, boolean>;
     if (!features[feature]) {
       return reply.status(403).send({
         success: false,

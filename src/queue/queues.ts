@@ -342,7 +342,7 @@ export async function getQueueStats(queueName: string): Promise<{
     queue.getCompletedCount(),
     queue.getFailedCount(),
     queue.getDelayedCount(),
-    queue.getPausedCount(),
+    (queue as any).getPausedCount?.() ?? Promise.resolve(0),
   ]);
 
   return { waiting, active, completed, failed, delayed, paused };

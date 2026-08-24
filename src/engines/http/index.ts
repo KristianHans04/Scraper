@@ -60,7 +60,7 @@ export class HttpEngine {
     const timeout = scrapeOptions.timeout || this.defaultTimeout;
 
     try {
-      const requestOptions: Dispatcher.RequestOptions = {
+      const requestOptions: Parameters<typeof undiciRequest>[1] = {
         method: method as Dispatcher.HttpMethod,
         headers: requestHeaders,
         body: body,

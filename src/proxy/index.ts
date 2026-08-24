@@ -1,6 +1,5 @@
 import { config } from '../config/index.js';
 import { logger } from '../utils/logger.js';
-import { ProxyError, ProxyAuthenticationError } from '../utils/errors.js';
 import type { ProxyConfig, ProxyTier } from '../types/index.js';
 
 export interface ProxyProviderConfig {

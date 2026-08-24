@@ -67,7 +67,7 @@ export class BrowserPool {
 
     const promises: Promise<void>[] = [];
     for (let i = 0; i < this.options.minSize; i++) {
-      promises.push(this.addBrowser());
+      promises.push(this.addBrowser().then(() => {}));
     }
 
     await Promise.all(promises);

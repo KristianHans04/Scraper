@@ -137,7 +137,7 @@ export function mergeScrapeOptions(userOptions?: Partial<ScrapeOptions>): Scrape
     ...defaults,
     ...userOptions,
     screenshotOptions: userOptions.screenshotOptions
-      ? { fullPage: false, format: 'png', ...userOptions.screenshotOptions }
+      ? { ...{ fullPage: false, format: 'png' as const }, ...userOptions.screenshotOptions }
       : undefined,
   };
 }

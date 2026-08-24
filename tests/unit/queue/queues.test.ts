@@ -27,16 +27,20 @@ vi.mock('bullmq', () => {
   };
 
   return {
-    Queue: vi.fn().mockImplementation((name) => ({ ...mockQueue, name })),
-    Worker: vi.fn().mockImplementation(() => ({
-      on: vi.fn(),
-      close: vi.fn().mockResolvedValue(undefined),
-    })),
-    QueueEvents: vi.fn().mockImplementation(() => ({
-      on: vi.fn(),
-      off: vi.fn(),
-      close: vi.fn().mockResolvedValue(undefined),
-    })),
+    Queue: vi.fn().mockImplementation(function(name) { return { ...mockQueue, name }; }),
+    Worker: vi.fn().mockImplementation(function() {
+      return {
+        on: vi.fn(),
+        close: vi.fn().mockResolvedValue(undefined),
+      };
+    }),
+    QueueEvents: vi.fn().mockImplementation(function() {
+      return {
+        on: vi.fn(),
+        off: vi.fn(),
+        close: vi.fn().mockResolvedValue(undefined),
+      };
+    }),
   };
 });
 

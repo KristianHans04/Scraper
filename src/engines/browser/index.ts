@@ -191,7 +191,7 @@ export class BrowserEngine {
   /**
    * Build browser context options
    */
-  private buildContextOptions(options: BrowserEngineOptions): Parameters<typeof getBrowserPool>['0'] extends undefined ? Record<string, unknown> : Record<string, unknown> {
+  private buildContextOptions(options: BrowserEngineOptions): Record<string, unknown> {
     const contextOptions: Record<string, unknown> = {
       viewport: { width: 1920, height: 1080 },
       ignoreHTTPSErrors: true,

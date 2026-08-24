@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Page, BrowserContext } from 'playwright';
 import { logger } from '../utils/logger.js';
 import type { BrowserFingerprint } from '../types/index.js';

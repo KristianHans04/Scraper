@@ -1,3 +1,4 @@
+import { randomBytes } from 'crypto';
 import { config } from '../config/index.js';
 import { logger } from '../utils/logger.js';
 import type { ProxyConfig, ProxyTier } from '../types/index.js';
@@ -189,8 +190,8 @@ export class ProxyManager {
       proxyUrl = proxyUrl.replace('{city}', city.toLowerCase());
     }
 
-    // Replace session placeholder with unique ID
-    const sessionId = `sess_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    // Replace session placeholder with unique ID (crypto RNG, not Math.random)
+    const sessionId = `sess_${Date.now()}_${randomBytes(8).toString('hex')}`;
     proxyUrl = proxyUrl.replace('{session}', sessionId);
 
     // Parse the URL

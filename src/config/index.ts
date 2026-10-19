@@ -38,6 +38,7 @@ const envSchema = z.object({
   API_KEY_PREFIX: z.string().default('sk_live_'),
   API_KEY_LENGTH: z.string().transform(Number).default('32'),
   API_KEY_HASH_ROUNDS: z.string().transform(Number).default('10'),
+  API_KEY_HASH_SECRET: z.string().default('scraperx-default-hash-secret'),
 
   // Scraping
   SCRAPE_TIMEOUT_MS: z.string().transform(Number).default('30000'),
@@ -138,6 +139,7 @@ export const config = {
     prefix: env.API_KEY_PREFIX,
     length: env.API_KEY_LENGTH,
     hashRounds: env.API_KEY_HASH_ROUNDS,
+    hashSecret: env.API_KEY_HASH_SECRET,
   },
 
   scraping: {

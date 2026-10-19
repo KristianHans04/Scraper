@@ -31,6 +31,9 @@ export const healthRoutes: FastifyPluginAsync = async (fastify) => {
       description: 'Readiness check for orchestration',
       tags: ['Health'],
     },
+    config: {
+      rateLimit: { max: 120, timeWindow: '1 minute' },
+    },
   }, async (_request, reply) => {
     try {
       // Check database
@@ -61,6 +64,9 @@ export const healthRoutes: FastifyPluginAsync = async (fastify) => {
     schema: {
       description: 'Liveness check for orchestration',
       tags: ['Health'],
+    },
+    config: {
+      rateLimit: { max: 120, timeWindow: '1 minute' },
     },
   }, async (_request, reply) => {
     return reply.status(200).send({

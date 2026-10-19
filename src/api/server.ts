@@ -4,6 +4,7 @@ import helmet from '@fastify/helmet';
 import sensible from '@fastify/sensible';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
+import rateLimit from '@fastify/rate-limit';
 import { config } from '../config/index.js';
 import { logger } from '../utils/logger.js';
 import { scrapeRoutes, healthRoutes } from './routes/index.js';
@@ -81,6 +82,19 @@ async function registerPlugins(server: FastifyInstance): Promise<void> {
 
   // Sensible defaults (adds reply.notFound(), etc.)
   await server.register(sensible);
+
+  // Rate limiting (per-IP token bucket; route-level overrides allowed)
+  await server.register(rateLimit, {
+    global: true,
+    max: config.rateLimit.maxRequests,
+    timeWindow: config.rateLimit.windowMs,
+    addHeaders: {
+      'x-ratelimit-limit': true,
+      'x-ratelimit-remaining': true,
+      'x-ratelimit-reset': true,
+      'retry-after': true,
+    },
+  });
 
   // Swagger documentation
   await server.register(swagger, {

@@ -8,15 +8,11 @@
 import { Pool } from 'pg';
 import { createHash, randomBytes } from 'crypto';
 import dotenv from 'dotenv';
+import { hashApiKey } from '../src/utils/crypto.js';
 
 dotenv.config();
 
 const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://scraperx:scraperx@localhost:5432/scraperx';
-
-// Helper to hash API key
-function hashApiKey(apiKey: string): string {
-  return createHash('sha256').update(apiKey).digest('hex');
-}
 
 // Helper to generate API key
 function generateApiKey(prefix: string = 'sk_test_'): string {

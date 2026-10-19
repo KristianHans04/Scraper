@@ -1,4 +1,4 @@
-import { createHash, randomBytes, timingSafeEqual } from 'crypto';
+import { createHash, randomBytes, scryptSync, timingSafeEqual } from 'crypto';
 import { config } from '../config/index.js';
 
 /**
@@ -18,9 +18,13 @@ export function extractApiKeyPrefix(apiKey: string): string {
 
 /**
  * Hash an API key for storage
+ *
+ * Uses scrypt — a memory-hard key derivation function — instead of a plain
+ * fast hash so that a leaked hash cannot be brute-forced cheaply.
  */
 export function hashApiKey(apiKey: string): string {
-  return createHash('sha256').update(apiKey).digest('hex');
+  const salt = config.apiKey.hashSecret ?? 'scraperx-default-hash-secret';
+  return scryptSync(apiKey, salt, 32).toString('hex');
 }
 
 /**

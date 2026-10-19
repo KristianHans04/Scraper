@@ -10,6 +10,7 @@ vi.mock('../../../src/config/index.js', () => ({
     apiKey: {
       prefix: 'sk_live_',
       length: 24,
+      hashSecret: 'test-hash-secret',
     },
   },
 }));
